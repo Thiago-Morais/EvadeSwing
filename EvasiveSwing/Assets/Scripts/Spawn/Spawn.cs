@@ -17,7 +17,7 @@ public class Spawn : MonoBehaviour
     [System.Serializable] public class SyncObjectsToUse
     {
         public string tag;
-        public SyncObject syncInstance;
+        public SyncObjectSO syncInstance;
     }
     public void SpawnInstance()
     {

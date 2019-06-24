@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New SyncObject", menuName = "Sync/Object")]
-public class SyncObject : ScriptableObject
+public class SyncObjectSO : ScriptableObject
 {
     public new string name;
+    public Vector3 position;
+    public Vector3 rotation;
+    public Vector3 scale;
     
-    [Header("NotesSync")]
+    [Header("SyncElement")]
+    
+    
     public int instRhythmicFigure;         //DIVISÃO DO BEAT PARA SPAWNAR A NOTA
     public int instBeatDuration;            //PARTE DO BEAT DIVIDIDO A SER TOCADO
     
@@ -19,4 +24,5 @@ public class SyncObject : ScriptableObject
     [SerializeField] private int sampleWaitTimeIndex;               //QUAL TEMPO ESTA SENDO USADO
     [SerializeField] private float nextSpawnTimeSample;             //QUANDO A PROXIMA NOTA SERA SPAWNADA
     [SerializeField] private float noteOffsetSec;                      //QUANTO TEMPO A NOTA VAI APARECER ANTES DO MOMENTO DO HIT (EM SEGUNDOS) */
+    
 }

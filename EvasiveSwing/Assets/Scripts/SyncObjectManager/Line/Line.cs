@@ -20,7 +20,7 @@ public class Line : MonoBehaviour
     IEnumerator MoveToTarget()
     {
         //lerp pra o lugar em função do tempo predefinido
-        ObjectPooler.Instance.ReturnToPool(tag, gameObject);//quando chegar, desativar //adicionar de volta pra a lista
+        /* ObjectPooler.Instance.ReturnToPool(tag, gameObject); //quando chegar, desativar //adicionar de volta pra a lista*/
         yield return null;
     }
     /* public void StartNotes()
