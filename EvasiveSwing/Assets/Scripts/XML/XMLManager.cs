@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 using System.Xml;
 using System.Xml.Serialization;
@@ -40,22 +41,47 @@ public class XMLManager : MonoBehaviour
     {
         syncManager = SyncManager.Instance;
     }
-    [EasyButtons.Button]//Save function
-    public void SaveItems()
+    /*[EasyButtons.Button]//Save function
+     public void SaveItems(Object list)
     {
         //Abrir um arquivo XML
         XmlSerializer serializer = new XmlSerializer(typeof(ItemDatabase));
         FileStream stream = new FileStream(Application.dataPath+"/StreamingFiles/XML/SyncObjects.xml", FileMode.Create);
         serializer.Serialize(stream, syncManager.objectsToSpawn);
         stream.Close();
-    }
-    [EasyButtons.Button]//Load function
+    } */
+    /* [EasyButtons.Button]//Load function
     public void LoadItems()
     {
         //Abrir um arquivo XML
         XmlSerializer serializer = new XmlSerializer(typeof(ItemDatabase));
         FileStream stream = new FileStream(Application.dataPath+"/StreamingFiles/XML/SyncObjects.xml", FileMode.Open);
         syncManager.objectsToSpawn = serializer.Deserialize(stream) as List<SyncManager.ObjectSpawnInfo>;
+        stream.Close();
+        foreach (SyncManager.PoolManagerInfo poolManagerInfo in syncManager.poolManagerList)
+        {
+            poolManagerInfo.poolManagerScript.GetObjectsInfo();
+        }
+    } */
+    [EasyButtons.Button]//Save function
+    public void SaveItems(ObjectsListSO list)
+    {
+        //Abrir um arquivo XML
+        XmlSerializer serializer = new XmlSerializer(list.GetType());
+        FileStream stream = new FileStream(Application.dataPath+"/StreamingFiles/XML/SyncObjects.xml", FileMode.Create);
+        serializer.Serialize(stream, list);
+        stream.Close();
+        
+        list.objectsSpawnTime.Sort();
+        syncManager.objectsListSO = list;
+    }
+    [EasyButtons.Button]//Load function
+    public void LoadItems(ObjectsListSO list)
+    {
+        //Abrir um arquivo XML
+        XmlSerializer serializer = new XmlSerializer(list.GetType());
+        FileStream stream = new FileStream(Application.dataPath+"/StreamingFiles/XML/SyncObjects.xml", FileMode.Open);
+        list = serializer.Deserialize(stream) as ObjectsListSO;
         stream.Close();
         foreach (SyncManager.PoolManagerInfo poolManagerInfo in syncManager.poolManagerList)
         {
